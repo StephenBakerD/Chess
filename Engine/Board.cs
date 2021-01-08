@@ -28,7 +28,7 @@ namespace Engine
             board[Squares.F2] = Pieces.Pawn;
             board[Squares.G2] = Pieces.Pawn;
             board[Squares.H2] = Pieces.Pawn;
-            
+
             //Row 3
             board[Squares.A3] = Pieces.Empty;
             board[Squares.B3] = Pieces.Empty;
@@ -38,7 +38,7 @@ namespace Engine
             board[Squares.F3] = Pieces.Empty;
             board[Squares.G3] = Pieces.Empty;
             board[Squares.H3] = Pieces.Empty;
-            
+
             //Row 4
             board[Squares.A4] = Pieces.Empty;
             board[Squares.B4] = Pieces.Empty;
@@ -48,7 +48,7 @@ namespace Engine
             board[Squares.F4] = Pieces.Empty;
             board[Squares.G4] = Pieces.Empty;
             board[Squares.H4] = Pieces.Empty;
-            
+
             //Row 5
             board[Squares.A5] = Pieces.Empty;
             board[Squares.B5] = Pieces.Empty;
@@ -94,8 +94,49 @@ namespace Engine
 
         public void MovePiece(string squareFrom, string squareTo)
         {
-            board[squareTo] = board[squareFrom];
-            board[squareFrom] = Pieces.Empty;
+            //Get the ordinal positions of both squares
+            int fromColumn = GetOrdinal(char.Parse(squareFrom.Substring(0, 1))); //1-8
+            int fromRow = int.Parse(squareFrom.Substring(1, 1));
+            int toColumn = GetOrdinal(char.Parse(squareTo.Substring(0, 1)));
+            int toRow = int.Parse(squareTo.Substring(1, 1));
+
+            //Calculate relative position deltas
+            var deltaUp = Math.Abs(toRow - fromRow);
+            var deltaRight = Math.Abs(toColumn - fromColumn);
+
+            //Check if the piece is allowed to move to the destination square
+            if (deltaUp == 2 && deltaRight == 1)
+            {
+                board[squareTo] = board[squareFrom];
+                board[squareFrom] = Pieces.Empty;
+            }
+            else
+                throw new InvalidOperationException();
+        }
+
+        private int GetOrdinal(char column)
+        {
+            switch (column)
+            {
+                case 'A':
+                    return 1;
+                case 'B':
+                    return 2;
+                case 'C':
+                    return 3;
+                case 'D':
+                    return 4;
+                case 'E':
+                    return 5;
+                case 'F':
+                    return 6;
+                case 'G':
+                    return 7;
+                case 'H':
+                    return 8;
+                default:
+                    throw new ArgumentException();
+            }
         }
     }
 }

@@ -1,5 +1,6 @@
 using Engine;
 using Xunit;
+using System;
 
 namespace EngineTest
 {
@@ -79,23 +80,41 @@ namespace EngineTest
         [InlineData(Squares.H8, Pieces.Rook)]
         public void Can_Create_Board(string square, string piece)
         {
-            var game = new Board();
+            var board = new Board();
 
-            Assert.Equal(piece, game.GetSquare(square));
+            Assert.Equal(piece, board.GetSquare(square));
         }
 
-        [Fact]
-        public void Can_Move_Piece()
+        [Theory]
+        [InlineData(Squares.B1, Squares.C3)]
+        [InlineData(Squares.B1, Squares.A3)]
+        public void Can_Move_Knight(string squareFrom, string squareTo)
+        {
+            //The knight can move in 1-4 legal directions depending upon its placement on the board
+            var board = new Board();
+
+            //Make sure target square is empty, and knight is on original square
+            Assert.Equal(Pieces.Knight, board.GetSquare(squareFrom));
+            Assert.Equal(Pieces.Empty, board.GetSquare(squareTo));
+
+            //Move the piece
+            board.MovePiece(squareFrom, squareTo);
+
+            //Make sure target square has the knight now, and original square is empty
+            Assert.Equal(Pieces.Empty, board.GetSquare(squareFrom));
+            Assert.Equal(Pieces.Knight, board.GetSquare(squareTo));
+        }
+
+        [Theory]
+        [InlineData(Squares.B1, Squares.B2)]
+        public void Cannot_Move_Knight_To_Illegal_Square(string squareFrom, string squareTo)
         {
             var board = new Board();
 
-            Assert.Equal(Pieces.Knight, board.GetSquare("B1"));
-            Assert.Equal(Pieces.Empty, board.GetSquare("C3"));
-
-            board.MovePiece("B1", "C3");
-
-            Assert.Equal(Pieces.Empty, board.GetSquare("B1"));
-            Assert.Equal(Pieces.Knight, board.GetSquare("C3"));
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                board.MovePiece(squareFrom, squareTo); //Invalid move
+            });
         }
     }
 }
