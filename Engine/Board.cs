@@ -100,18 +100,38 @@ namespace Engine
             int toColumn = GetOrdinal(char.Parse(squareTo.Substring(0, 1)));
             int toRow = int.Parse(squareTo.Substring(1, 1));
 
-            //Calculate relative position deltas
-            var deltaUp = Math.Abs(toRow - fromRow);
-            var deltaRight = Math.Abs(toColumn - fromColumn);
-
-            //Check if the piece is allowed to move to the destination square
-            if (deltaUp == 2 && deltaRight == 1)
+            if(GetSquare(squareFrom) == Pieces.Knight)
             {
-                board[squareTo] = board[squareFrom];
-                board[squareFrom] = Pieces.Empty;
+                //Calculate relative position deltas
+                var deltaUp = Math.Abs(toRow - fromRow);
+                var deltaRight = Math.Abs(toColumn - fromColumn);
+
+                //Check if the piece is allowed to move to the destination square
+                if (deltaUp == 2 && deltaRight == 1)
+                {
+                    board[squareTo] = board[squareFrom];
+                    board[squareFrom] = Pieces.Empty;
+                }
+                else
+                    throw new InvalidOperationException();
             }
-            else
-                throw new InvalidOperationException();
+
+            else if (GetSquare(squareFrom) == Pieces.Bishop)
+            {
+                //Calculate relative position deltas
+                var deltaUp = toRow - fromRow;
+                var deltaRight = toColumn - fromColumn;
+
+                //Check to see if the bishop is moving diagonally 
+                if (deltaUp > 0 && deltaRight > 0 && deltaUp % deltaRight == 0 && deltaRight % deltaUp == 0)
+                {
+                    board[squareTo] = board[squareFrom];
+                    board[squareFrom] = Pieces.Empty;
+                }
+                else
+                    throw new InvalidOperationException();
+            }
+
         }
 
         private int GetOrdinal(char column)

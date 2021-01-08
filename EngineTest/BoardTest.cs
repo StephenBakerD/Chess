@@ -90,7 +90,6 @@ namespace EngineTest
         [InlineData(Squares.B1, Squares.A3)]
         public void Can_Move_Knight(string squareFrom, string squareTo)
         {
-            //The knight can move in 1-4 legal directions depending upon its placement on the board
             var board = new Board();
 
             //Make sure target square is empty, and knight is on original square
@@ -106,8 +105,42 @@ namespace EngineTest
         }
 
         [Theory]
+        [InlineData(Squares.C1, Squares.D2)]
+        [InlineData(Squares.C1, Squares.E3)]
+        [InlineData(Squares.C1, Squares.F4)]
+        [InlineData(Squares.C1, Squares.G5)]
+        [InlineData(Squares.C1, Squares.H6)]
+        public void Can_Move_Bishop(string squareFrom, string squareTo)
+        {
+            var board = new Board();
+
+            //Make sure piece is on original square
+            Assert.Equal(Pieces.Bishop, board.GetSquare(squareFrom));
+
+            //Move the piece
+            board.MovePiece(squareFrom, squareTo);
+
+            //Make sure target square has the piece now, and original square is empty
+            Assert.Equal(Pieces.Empty, board.GetSquare(squareFrom));
+            Assert.Equal(Pieces.Bishop, board.GetSquare(squareTo));
+        }
+
+        [Theory]
         [InlineData(Squares.B1, Squares.B2)]
         public void Cannot_Move_Knight_To_Illegal_Square(string squareFrom, string squareTo)
+        {
+            var board = new Board();
+
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                board.MovePiece(squareFrom, squareTo); //Invalid move
+            });
+        }
+
+        [Theory]
+        [InlineData(Squares.C1, Squares.C2)]
+        [InlineData(Squares.C1, Squares.E4)]
+        public void Cannot_Move_Bishop_To_Illegal_Square(string squareFrom, string squareTo)
         {
             var board = new Board();
 
