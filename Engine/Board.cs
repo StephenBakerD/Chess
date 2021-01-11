@@ -1,162 +1,109 @@
 ﻿using System;
 using System.Collections.Generic;
+using Engine.Pieces;
 
 namespace Engine
 {
     public class Board
     {
-        private Dictionary<string, string> board = new Dictionary<string, string>();
+        private Dictionary<string, IPiece> squares = new Dictionary<string, IPiece>();
 
         public Board()
         {
             //Row 1
-            board[Squares.A1] = Pieces.Rook;
-            board[Squares.B1] = Pieces.Knight;
-            board[Squares.C1] = Pieces.Bishop;
-            board[Squares.D1] = Pieces.Queen;
-            board[Squares.E1] = Pieces.King;
-            board[Squares.F1] = Pieces.Bishop;
-            board[Squares.G1] = Pieces.Knight;
-            board[Squares.H1] = Pieces.Rook;
+            squares[Squares.A1] = new Rook();
+            squares[Squares.B1] = new Knight();
+            squares[Squares.C1] = new Bishop();
+            squares[Squares.D1] = new Queen();
+            squares[Squares.E1] = new King();
+            squares[Squares.F1] = new Bishop();
+            squares[Squares.G1] = new Knight();
+            squares[Squares.H1] = new Rook();
 
             //Row 2
-            board[Squares.A2] = Pieces.Pawn;
-            board[Squares.B2] = Pieces.Pawn;
-            board[Squares.C2] = Pieces.Pawn;
-            board[Squares.D2] = Pieces.Pawn;
-            board[Squares.E2] = Pieces.Pawn;
-            board[Squares.F2] = Pieces.Pawn;
-            board[Squares.G2] = Pieces.Pawn;
-            board[Squares.H2] = Pieces.Pawn;
+            squares[Squares.A2] = new Pawn();
+            squares[Squares.B2] = new Pawn();
+            squares[Squares.C2] = new Pawn();
+            squares[Squares.D2] = new Pawn();
+            squares[Squares.E2] = new Pawn();
+            squares[Squares.F2] = new Pawn();
+            squares[Squares.G2] = new Pawn();
+            squares[Squares.H2] = new Pawn();
 
             //Row 3
-            board[Squares.A3] = Pieces.Empty;
-            board[Squares.B3] = Pieces.Empty;
-            board[Squares.C3] = Pieces.Empty;
-            board[Squares.D3] = Pieces.Empty;
-            board[Squares.E3] = Pieces.Empty;
-            board[Squares.F3] = Pieces.Empty;
-            board[Squares.G3] = Pieces.Empty;
-            board[Squares.H3] = Pieces.Empty;
+            squares[Squares.A3] = null;
+            squares[Squares.B3] = null;
+            squares[Squares.C3] = null;
+            squares[Squares.D3] = null;
+            squares[Squares.E3] = null;
+            squares[Squares.F3] = null;
+            squares[Squares.G3] = null;
+            squares[Squares.H3] = null;
 
             //Row 4
-            board[Squares.A4] = Pieces.Empty;
-            board[Squares.B4] = Pieces.Empty;
-            board[Squares.C4] = Pieces.Empty;
-            board[Squares.D4] = Pieces.Empty;
-            board[Squares.E4] = Pieces.Empty;
-            board[Squares.F4] = Pieces.Empty;
-            board[Squares.G4] = Pieces.Empty;
-            board[Squares.H4] = Pieces.Empty;
+            squares[Squares.A4] = null;
+            squares[Squares.B4] = null;
+            squares[Squares.C4] = null;
+            squares[Squares.D4] = null;
+            squares[Squares.E4] = null;
+            squares[Squares.F4] = null;
+            squares[Squares.G4] = null;
+            squares[Squares.H4] = null;
 
             //Row 5
-            board[Squares.A5] = Pieces.Empty;
-            board[Squares.B5] = Pieces.Empty;
-            board[Squares.C5] = Pieces.Empty;
-            board[Squares.D5] = Pieces.Empty;
-            board[Squares.E5] = Pieces.Empty;
-            board[Squares.F5] = Pieces.Empty;
-            board[Squares.G5] = Pieces.Empty;
-            board[Squares.H5] = Pieces.Empty;
+            squares[Squares.A5] = null;
+            squares[Squares.B5] = null;
+            squares[Squares.C5] = null;
+            squares[Squares.D5] = null;
+            squares[Squares.E5] = null;
+            squares[Squares.F5] = null;
+            squares[Squares.G5] = null;
+            squares[Squares.H5] = null;
 
             //Row 6
-            board[Squares.A6] = Pieces.Empty;
-            board[Squares.B6] = Pieces.Empty;
-            board[Squares.C6] = Pieces.Empty;
-            board[Squares.D6] = Pieces.Empty;
-            board[Squares.E6] = Pieces.Empty;
-            board[Squares.F6] = Pieces.Empty;
-            board[Squares.G6] = Pieces.Empty;
-            board[Squares.H6] = Pieces.Empty;
+            squares[Squares.A6] = null;
+            squares[Squares.B6] = null;
+            squares[Squares.C6] = null;
+            squares[Squares.D6] = null;
+            squares[Squares.E6] = null;
+            squares[Squares.F6] = null;
+            squares[Squares.G6] = null;
+            squares[Squares.H6] = null;
 
             //Row 7
-            board[Squares.A7] = Pieces.Pawn;
-            board[Squares.B7] = Pieces.Pawn;
-            board[Squares.C7] = Pieces.Pawn;
-            board[Squares.D7] = Pieces.Pawn;
-            board[Squares.E7] = Pieces.Pawn;
-            board[Squares.F7] = Pieces.Pawn;
-            board[Squares.G7] = Pieces.Pawn;
-            board[Squares.H7] = Pieces.Pawn;
+            squares[Squares.A7] = new Pawn();
+            squares[Squares.B7] = new Pawn();
+            squares[Squares.C7] = new Pawn();
+            squares[Squares.D7] = new Pawn();
+            squares[Squares.E7] = new Pawn();
+            squares[Squares.F7] = new Pawn();
+            squares[Squares.G7] = new Pawn();
+            squares[Squares.H7] = new Pawn();
 
             //Row 8
-            board[Squares.A8] = Pieces.Rook;
-            board[Squares.B8] = Pieces.Knight;
-            board[Squares.C8] = Pieces.Bishop;
-            board[Squares.D8] = Pieces.Queen;
-            board[Squares.E8] = Pieces.King;
-            board[Squares.F8] = Pieces.Bishop;
-            board[Squares.G8] = Pieces.Knight;
-            board[Squares.H8] = Pieces.Rook;
+            squares[Squares.A8] = new Rook();
+            squares[Squares.B8] = new Knight();
+            squares[Squares.C8] = new Bishop();
+            squares[Squares.D8] = new Queen();
+            squares[Squares.E8] = new King();
+            squares[Squares.F8] = new Bishop();
+            squares[Squares.G8] = new Knight();
+            squares[Squares.H8] = new Rook();
         }
 
-        public string GetSquare(string square) => board[square];
+        public IPiece GetSquare(string square) => squares[square];
 
-        public void MovePiece(string squareFrom, string squareTo)
+        public bool TryMovePiece(string squareFrom, string squareTo)
         {
-            //Get the ordinal positions of both squares
-            int fromColumn = GetOrdinal(char.Parse(squareFrom.Substring(0, 1))); //1-8
-            int fromRow = int.Parse(squareFrom.Substring(1, 1));
-            int toColumn = GetOrdinal(char.Parse(squareTo.Substring(0, 1)));
-            int toRow = int.Parse(squareTo.Substring(1, 1));
+            var success = GetSquare(squareFrom).TryMove(squareFrom, squareTo, GetSquare(squareTo));
 
-            if(GetSquare(squareFrom) == Pieces.Knight)
+            if (success)
             {
-                //Calculate relative position deltas
-                var deltaUp = Math.Abs(toRow - fromRow);
-                var deltaRight = Math.Abs(toColumn - fromColumn);
-
-                //Check if the piece is allowed to move to the destination square
-                if (deltaUp == 2 && deltaRight == 1)
-                {
-                    board[squareTo] = board[squareFrom];
-                    board[squareFrom] = Pieces.Empty;
-                }
-                else
-                    throw new InvalidOperationException();
+                squares[squareTo] = squares[squareFrom];
+                squares[squareFrom] = null;
             }
 
-            else if (GetSquare(squareFrom) == Pieces.Bishop)
-            {
-                //Calculate relative position deltas
-                var deltaUp = toRow - fromRow;
-                var deltaRight = toColumn - fromColumn;
-
-                //Check to see if the bishop is moving diagonally 
-                if (deltaUp > 0 && deltaRight > 0 && deltaUp % deltaRight == 0 && deltaRight % deltaUp == 0)
-                {
-                    board[squareTo] = board[squareFrom];
-                    board[squareFrom] = Pieces.Empty;
-                }
-                else
-                    throw new InvalidOperationException();
-            }
-
-        }
-
-        private int GetOrdinal(char column)
-        {
-            switch (column)
-            {
-                case 'A':
-                    return 1;
-                case 'B':
-                    return 2;
-                case 'C':
-                    return 3;
-                case 'D':
-                    return 4;
-                case 'E':
-                    return 5;
-                case 'F':
-                    return 6;
-                case 'G':
-                    return 7;
-                case 'H':
-                    return 8;
-                default:
-                    throw new ArgumentException();
-            }
+            return success;
         }
     }
 }
