@@ -6,7 +6,9 @@ namespace Engine
 {
     public interface IPiece
     {
-        bool TryMove(string squareFrom, string squareTo, IPiece targetPiece);
+        string CurrentSquare { get; }
+        bool TryMove(string square);
         string GetName();
+        void AddToBoard(Board board, string square);
     }
 }

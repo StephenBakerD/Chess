@@ -6,110 +6,188 @@ namespace Engine
 {
     public class Board
     {
-        private Dictionary<string, IPiece> squares = new Dictionary<string, IPiece>();
+        public Dictionary<string, IPiece> Squares { get; private set; }
 
-        public Board(Dictionary<string, IPiece> pieces)
+        public Board()
         {
-            foreach (var piece in pieces)
+            Squares = new Dictionary<string, IPiece>()
             {
-                squares[piece.Key] = piece.Value;
+                { Engine.Squares.A1, null },
+                { Engine.Squares.B1, null },
+                { Engine.Squares.C1, null },
+                { Engine.Squares.D1, null },
+                { Engine.Squares.E1, null },
+                { Engine.Squares.F1, null },
+                { Engine.Squares.G1, null },
+                { Engine.Squares.H1, null },
+
+                { Engine.Squares.A2, null },
+                { Engine.Squares.B2, null },
+                { Engine.Squares.C2, null },
+                { Engine.Squares.D2, null },
+                { Engine.Squares.E2, null },
+                { Engine.Squares.F2, null },
+                { Engine.Squares.G2, null },
+                { Engine.Squares.H2, null },
+
+                { Engine.Squares.A3, null },
+                { Engine.Squares.B3, null },
+                { Engine.Squares.C3, null },
+                { Engine.Squares.D3, null },
+                { Engine.Squares.E3, null },
+                { Engine.Squares.F3, null },
+                { Engine.Squares.G3, null },
+                { Engine.Squares.H3, null },
+
+                { Engine.Squares.A4, null },
+                { Engine.Squares.B4, null },
+                { Engine.Squares.C4, null },
+                { Engine.Squares.D4, null },
+                { Engine.Squares.E4, null },
+                { Engine.Squares.F4, null },
+                { Engine.Squares.G4, null },
+                { Engine.Squares.H4, null },
+
+                { Engine.Squares.A5, null },
+                { Engine.Squares.B5, null },
+                { Engine.Squares.C5, null },
+                { Engine.Squares.D5, null },
+                { Engine.Squares.E5, null },
+                { Engine.Squares.F5, null },
+                { Engine.Squares.G5, null },
+                { Engine.Squares.H5, null },
+
+                { Engine.Squares.A6, null },
+                { Engine.Squares.B6, null },
+                { Engine.Squares.C6, null },
+                { Engine.Squares.D6, null },
+                { Engine.Squares.E6, null },
+                { Engine.Squares.F6, null },
+                { Engine.Squares.G6, null },
+                { Engine.Squares.H6, null },
+
+                { Engine.Squares.A7, null },
+                { Engine.Squares.B7, null },
+                { Engine.Squares.C7, null },
+                { Engine.Squares.D7, null },
+                { Engine.Squares.E7, null },
+                { Engine.Squares.F7, null },
+                { Engine.Squares.G7, null },
+                { Engine.Squares.H7, null },
+                              
+                { Engine.Squares.A8, null },
+                { Engine.Squares.B8, null },
+                { Engine.Squares.C8, null },
+                { Engine.Squares.D8, null },
+                { Engine.Squares.E8, null },
+                { Engine.Squares.F8, null },
+                { Engine.Squares.G8, null },
+                { Engine.Squares.H8, null }
+            };
+        }
+
+        public Board(Dictionary<string, IPiece> squares) : this()
+        {
+            foreach(var square in squares.Keys)
+            {
+                Squares[square] = squares[square]; //TODO: Fix naming
             }
         }
 
-        public IPiece GetSquare(string square) => squares[square];
-
-        public bool TryMovePiece(string squareFrom, string squareTo)
+        public static Board CreateStandardBoard()
         {
-            var success = GetSquare(squareFrom).TryMove(squareFrom, squareTo, GetSquare(squareTo));
+            
+            //{
+            //    { Engine.Squares.A1, new Rook() },
+            //    { Engine.Squares.B1, new Knight() },
+            //    { Engine.Squares.C1, new Bishop() },
+            //    { Engine.Squares.D1, new Queen() },
+            //    { Engine.Squares.E1, new King() },
+            //    { Engine.Squares.F1, new Bishop() },
+            //    { Engine.Squares.G1, new Knight() },
+            //    { Engine.Squares.H1, new Rook() },
 
-            if (success)
-            {
-                squares[squareTo] = squares[squareFrom];
-                squares[squareFrom] = null;
-            }
+            //    { Engine.Squares.A2, new Pawn() },
+            //    { Engine.Squares.B2, new Pawn() },
+            //    { Engine.Squares.C2, new Pawn() },
+            //    { Engine.Squares.D2, new Pawn() },
+            //    { Engine.Squares.E2, new Pawn() },
+            //    { Engine.Squares.F2, new Pawn() },
+            //    { Engine.Squares.G2, new Pawn() },
+            //    { Engine.Squares.H2, new Pawn() },
 
-            return success;
+            //    { Engine.Squares.A3, null },
+            //    { Engine.Squares.B3, null },
+            //    { Engine.Squares.C3, null },
+            //    { Engine.Squares.D3, null },
+            //    { Engine.Squares.E3, null },
+            //    { Engine.Squares.F3, null },
+            //    { Engine.Squares.G3, null },
+            //    { Engine.Squares.H3, null },
+
+            //    { Engine.Squares.A4, null },
+            //    { Engine.Squares.B4, null },
+            //    { Engine.Squares.C4, null },
+            //    { Engine.Squares.D4, null },
+            //    { Engine.Squares.E4, null },
+            //    { Engine.Squares.F4, null },
+            //    { Engine.Squares.G4, null },
+            //    { Engine.Squares.H4, null },
+
+            //    { Engine.Squares.A5, null },
+            //    { Engine.Squares.B5, null },
+            //    { Engine.Squares.C5, null },
+            //    { Engine.Squares.D5, null },
+            //    { Engine.Squares.E5, null },
+            //    { Engine.Squares.F5, null },
+            //    { Engine.Squares.G5, null },
+            //    { Engine.Squares.H5, null },
+
+            //    { Engine.Squares.A6, null },
+            //    { Engine.Squares.B6, null },
+            //    { Engine.Squares.C6, null },
+            //    { Engine.Squares.D6, null },
+            //    { Engine.Squares.E6, null },
+            //    { Engine.Squares.F6, null },
+            //    { Engine.Squares.G6, null },
+            //    { Engine.Squares.H6, null },
+
+            //    { Engine.Squares.A7, new Pawn()},
+            //    { Engine.Squares.B7, new Pawn()},
+            //    { Engine.Squares.C7, new Pawn()},
+            //    { Engine.Squares.D7, new Pawn()},
+            //    { Engine.Squares.E7, new Pawn()},
+            //    { Engine.Squares.F7, new Pawn()},
+            //    { Engine.Squares.G7, new Pawn()},
+            //    { Engine.Squares.H7, new Pawn()},
+
+            //    { Engine.Squares.A8, new Rook()},
+            //    { Engine.Squares.B8, new Knight()},
+            //    { Engine.Squares.C8, new Bishop()},
+            //    { Engine.Squares.D8, new Queen()},
+            //    { Engine.Squares.E8, new King()},
+            //    { Engine.Squares.F8, new Bishop()},
+            //    { Engine.Squares.G8, new Knight()},
+            //    { Engine.Squares.H8, new Rook() }
+            //};
+
+            return new Board();
         }
 
-        public static Dictionary<string, IPiece> NormalPieceArrangement
+        public List<string> GetPossibleMoves(string fromSquare)
         {
-            get
+            var result = new List<string>();
+            var piece = Squares[fromSquare];
+
+            foreach (var toSquare in Squares.Keys)
             {
-                return new Dictionary<string, IPiece>()
+                if(piece.TryMove(toSquare))
                 {
-                    { Squares.A1, new Rook() },
-                    { Squares.B1, new Knight() },
-                    { Squares.C1, new Bishop() },
-                    { Squares.D1, new Queen() },
-                    { Squares.E1, new King() },
-                    { Squares.F1, new Bishop() },
-                    { Squares.G1, new Knight() },
-                    { Squares.H1, new Rook() },
-
-                    { Squares.A2, new Pawn() },
-                    { Squares.B2, new Pawn() },
-                    { Squares.C2, new Pawn() },
-                    { Squares.D2, new Pawn() },
-                    { Squares.E2, new Pawn() },
-                    { Squares.F2, new Pawn() },
-                    { Squares.G2, new Pawn() },
-                    { Squares.H2, new Pawn() },
-
-                    { Squares.A3, null },
-                    { Squares.B3, null },
-                    { Squares.C3, null },
-                    { Squares.D3, null },
-                    { Squares.E3, null },
-                    { Squares.F3, null },
-                    { Squares.G3, null },
-                    { Squares.H3, null },
-
-                    { Squares.A4, null },
-                    { Squares.B4, null },
-                    { Squares.C4, null },
-                    { Squares.D4, null },
-                    { Squares.E4, null },
-                    { Squares.F4, null },
-                    { Squares.G4, null },
-                    { Squares.H4, null },
-
-                    { Squares.A5, null },
-                    { Squares.B5, null },
-                    { Squares.C5, null },
-                    { Squares.D5, null },
-                    { Squares.E5, null },
-                    { Squares.F5, null },
-                    { Squares.G5, null },
-                    { Squares.H5, null },
-
-                    { Squares.A6, null },
-                    { Squares.B6, null },
-                    { Squares.C6, null },
-                    { Squares.D6, null },
-                    { Squares.E6, null },
-                    { Squares.F6, null },
-                    { Squares.G6, null },
-                    { Squares.H6, null },
-
-                    { Squares.A7, new Pawn()},
-                    { Squares.B7, new Pawn()},
-                    { Squares.C7, new Pawn()},
-                    { Squares.D7, new Pawn()},
-                    { Squares.E7, new Pawn()},
-                    { Squares.F7, new Pawn()},
-                    { Squares.G7, new Pawn()},
-                    { Squares.H7, new Pawn()},
-
-                    { Squares.A8, new Rook()},
-                    { Squares.B8, new Knight()},
-                    { Squares.C8, new Bishop()},
-                    { Squares.D8, new Queen()},
-                    { Squares.E8, new King()},
-                    { Squares.F8, new Bishop()},
-                    { Squares.G8, new Knight()},
-                    { Squares.H8, new Rook() }
-                };
+                    result.Add(toSquare);
+                }
             }
+
+            return result;
         }
     }
 }
