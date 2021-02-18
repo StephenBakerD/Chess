@@ -23,14 +23,7 @@ namespace Engine.Pieces
 
         public bool TryMove(string toSquare)
         {
-            var x = Utilities.GetOridinal(CurrentSquare);
-            var y = Utilities.GetOridinal(toSquare);
-
-            //Calculate relative position deltas
-            var deltaUp = Math.Abs(x.Row - y.Row);
-            var deltaRight = Math.Abs(x.Column - y.Column);
-
-            return (deltaUp > 0 && deltaRight > 0 && deltaUp % deltaRight == 0 && deltaRight % deltaUp == 0);
+            return Move.IsDiagonalMove(CurrentSquare, toSquare);
         }
     }
 }

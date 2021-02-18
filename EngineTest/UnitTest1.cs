@@ -32,6 +32,8 @@ namespace EngineTest
             Assert.That(result.AreEqual, Is.True, result.DifferencesString);
         }
 
+
+
         //[Theory]
         //[InlineData(Knight.Name, Squares.B1, Squares.B2)]
         //[InlineData(Bishop.Name, Squares.C1, Squares.C2)]
