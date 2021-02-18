@@ -20,7 +20,7 @@ namespace Engine.Pieces
         {
             this.board = board;
             CurrentSquare = square;
-            board.Squares.Add(square, this);
+            board.Squares[square] = this;
         }
 
         public bool TryMove(string square)

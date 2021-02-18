@@ -20,7 +20,7 @@ namespace Engine.Pieces
         {
             this.board = board;
             CurrentSquare = square;
-            board.Squares.Add(square, this);
+            board.Squares[square] = this;
         }
 
         public bool TryMove(string toSquare)
@@ -29,10 +29,10 @@ namespace Engine.Pieces
             var y = Utilities.GetOridinal(toSquare);
 
             //Calculate relative position deltas
-            var deltaUp = Math.Abs(x.Row - y.Row);
-            var deltaRight = Math.Abs(x.Column - y.Column);
+            var deltaUp = Math.Abs(x.Row - y.Row); //Row 6 - Row 4 = 2 squares
+            var deltaRight = Math.Abs(x.Column - y.Column); //Column F - Column E = 1 square
 
-            return (deltaUp == 2 && deltaRight == 1);
+            return ((deltaUp == 2 && deltaRight == 1) || (deltaUp == 1 && deltaRight == 2));
         }
     }
 }
