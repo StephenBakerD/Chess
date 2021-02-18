@@ -23,9 +23,19 @@ namespace Engine.Pieces
             board.Squares[square] = this;
         }
 
-        public bool TryMove(string square)
+        public bool TryMove(string toSquare)
         {
-            throw new NotImplementedException();
+            var x = Utilities.GetOridinal(CurrentSquare);
+            var y = Utilities.GetOridinal(toSquare);
+
+            //Calculate relative position deltas
+            var deltaUp = Math.Abs(x.Row - y.Row);
+            var deltaRight = Math.Abs(x.Column - y.Column);
+
+            bool isDiagonal = (deltaUp > 0 && deltaRight > 0 && deltaUp % deltaRight == 0 && deltaRight % deltaUp == 0);
+            bool isVerticalHorizontal = ((deltaRight == 0 && deltaUp > 0) || (deltaRight > 0 && deltaUp == 0));
+
+            return isDiagonal || isVerticalHorizontal;
         }
     }
 }
