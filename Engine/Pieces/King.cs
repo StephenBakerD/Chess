@@ -23,9 +23,9 @@ namespace Engine.Pieces
             board.Squares[square] = this;
         }
 
-        public bool TryMove(string square)
+        public bool TryMove(string toSquare)
         {
-            throw new NotImplementedException();
+            return Move.IsOne(CurrentSquare, toSquare);
         }
     }
 }

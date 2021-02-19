@@ -27,7 +27,7 @@ namespace Engine.Pieces
 
         public bool TryMove(string toSquare)
         {
-            return Move.IsLShapeMove(CurrentSquare, toSquare);
+            return Move.IsLShape(CurrentSquare, toSquare);
         }
     }
 }

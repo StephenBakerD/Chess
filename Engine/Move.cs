@@ -5,43 +5,67 @@ namespace Engine
 {
     public class Move
     {
-        private static (int up, int right) CalculateRelativeDeltas(string fromSquare, string toSquare)
+        private static (int up, int right) CalculateDeltas(string fromSquare, string toSquare, bool absolute)
         {
-            var x = Utilities.GetOridinal(fromSquare);
-            var y = Utilities.GetOridinal(toSquare);
+            var from = Utilities.GetOridinal(fromSquare);
+            var to = Utilities.GetOridinal(toSquare);
 
-            var deltaUp = Math.Abs(x.Row - y.Row);
-            var deltaRight = Math.Abs(x.Column - y.Column);
+            var deltaUp = to.Row - from.Row;
+            var deltaRight = to.Column - from.Column;
+
+            if (absolute)
+            {
+                deltaUp = Math.Abs(deltaUp);
+                deltaRight = Math.Abs(deltaRight);
+            }
 
             return (deltaUp, deltaRight);
         }
 
-        public static bool IsHorizontalMove(string fromSquare, string toSquare)
+        public static bool IsHorizontal(string fromSquare, string toSquare)
         {
-            var delta = CalculateRelativeDeltas(fromSquare, toSquare);
+            var delta = CalculateDeltas(fromSquare, toSquare, absolute: true);
 
             return delta.right > 0 && delta.up == 0;
         }
 
-        public static bool IsVerticalMove(string fromSquare, string toSquare)
+        public static bool IsVertical(string fromSquare, string toSquare)
         {
-            var delta = CalculateRelativeDeltas(fromSquare, toSquare);
+            var delta = CalculateDeltas(fromSquare, toSquare, absolute: true);
 
             return delta.right == 0 && delta.up > 0;
         }
 
-        public static bool IsDiagonalMove(string fromSquare, string toSquare)
+        public static bool IsDiagonal(string fromSquare, string toSquare)
         {
-            var delta = CalculateRelativeDeltas(fromSquare, toSquare);
+            var delta = CalculateDeltas(fromSquare, toSquare, absolute: true);
 
             return (delta.up > 0 && delta.right > 0 && delta.up % delta.right == 0 && delta.right % delta.up == 0);
         }
 
-        public static bool IsLShapeMove(string fromSquare, string toSquare)
+        public static bool IsLShape(string fromSquare, string toSquare)
         {
-            var delta = CalculateRelativeDeltas(fromSquare, toSquare);
+            var delta = CalculateDeltas(fromSquare, toSquare, absolute: true);
 
             return ((delta.up == 2 && delta.right == 1) || (delta.up == 1 && delta.right == 2));
+        }
+
+        public static bool IsOneInFront(string fromSquare, string toSquare)
+        {
+            var delta = CalculateDeltas(fromSquare, toSquare, absolute: false);
+
+            return (delta.up == 1 & delta.right == 0);
+        }
+
+        public static bool IsOne(string fromSquare, string toSquare)
+        {
+            var delta = CalculateDeltas(fromSquare, toSquare, absolute: true);
+
+            bool isVertical = delta.up == 1 && delta.right == 0;
+            bool isHorizontal = delta.up == 0 && delta.right == 1;
+            bool isDiagonal = delta.up == 1 && delta.right == 1;
+
+            return isVertical || isHorizontal || isDiagonal;
         }
     }
 }

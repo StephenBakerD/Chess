@@ -23,7 +23,7 @@ namespace Engine.Pieces
 
         public bool TryMove(string toSquare)
         {
-            return Move.IsDiagonalMove(CurrentSquare, toSquare);
+            return Move.IsDiagonal(CurrentSquare, toSquare);
         }
     }
 }

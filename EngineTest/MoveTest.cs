@@ -9,30 +9,44 @@ namespace EngineTest
     class MoveTest
     {
         [Test]
-        public void IsHorizontalMove()
+        public void IsHorizontal()
         {
-            var result = Move.IsHorizontalMove("E4", "F4");
+            var result = Move.IsHorizontal("E4", "F4");
             Assert.That(result, Is.True);
         }
 
         [Test]
-        public void IsVerticalMove()
+        public void IsVertical()
         {
-            var result = Move.IsVerticalMove("E4", "E5");
+            var result = Move.IsVertical("E4", "E5");
             Assert.That(result, Is.True);
         }
 
         [Test]
-        public void IsDiagonalMove()
+        public void IsDiagonal()
         {
-            var result = Move.IsDiagonalMove("E4", "F5");
+            var result = Move.IsDiagonal("E4", "F5");
             Assert.That(result, Is.True);
         }
 
         [Test]
-        public void IsLShapeMove()
+        public void IsLShape()
         {
-            var result = Move.IsLShapeMove("E4", "F6");
+            var result = Move.IsLShape("E4", "F6");
+            Assert.That(result, Is.True);
+        }
+
+        [Test]
+        public void IsOneInFront()
+        {
+            var result = Move.IsOneInFront("E5", "E6");
+            Assert.That(result, Is.True);
+        }
+
+        [Test]
+        public void IsOne()
+        {
+            var result = Move.IsOne("E5", "E4");
             Assert.That(result, Is.True);
         }
     }
