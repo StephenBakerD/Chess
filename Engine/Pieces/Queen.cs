@@ -25,9 +25,12 @@ namespace Engine.Pieces
 
         public bool TryMove(string toSquare)
         {
-            return Move.IsHorizontal(CurrentSquare, toSquare)
-                || Move.IsVertical(CurrentSquare, toSquare)
-                || Move.IsDiagonal(CurrentSquare, toSquare);
+            var isPieceOnDestination = board.Squares[toSquare] != null;
+            var isHorizontal = Move.IsHorizontal(CurrentSquare, toSquare);
+            var isVertical = Move.IsVertical(CurrentSquare, toSquare);
+            var isDiagonal = Move.IsDiagonal(CurrentSquare, toSquare);
+
+            return (isHorizontal || isVertical || isDiagonal) && !isPieceOnDestination;
         }
     }
 }

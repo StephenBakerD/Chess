@@ -25,7 +25,10 @@ namespace Engine.Pieces
 
         public bool TryMove(string toSquare)
         {
-            return Move.IsOneInFront(CurrentSquare, toSquare);
+            var isPieceOnDestination = board.Squares[toSquare] != null;
+            var isOneInFront = Move.IsOneInFront(CurrentSquare, toSquare);
+
+            return isOneInFront && !isPieceOnDestination;
         }
     }
 }

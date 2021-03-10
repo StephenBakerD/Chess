@@ -25,7 +25,10 @@ namespace Engine.Pieces
 
         public bool TryMove(string toSquare)
         {
-            return Move.IsOne(CurrentSquare, toSquare);
+            var isPieceOnDestination = board.Squares[toSquare] != null;
+            var isOneAway =  Move.IsOne(CurrentSquare, toSquare);
+
+            return isOneAway && !isPieceOnDestination;
         }
     }
 }
